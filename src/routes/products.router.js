@@ -58,20 +58,16 @@ router.post("/", async (req, res) => {
 router.put("/:pid", async (req, res) => {
   const { pid } = req.params;
   const newProductValues = req.body;
-  console.log("pid:", pid)
-  console.log("newProductValuies:", newProductValues)
-  if (pid != undefined && newProductValues ) {
+  if (pid != undefined && newProductValues) {
     try {
-        console.log("entre aca")
-        await productManager.updateProductById(pid, newProductValues);
-        res.status(201).json({ message: `Product with id ${pid} updated` });
-      } catch (err) {
-        res.status(500).json({ error: "Error de servidor" });
-      }
+      await productManager.updateProductById(pid, newProductValues);
+      res.status(201).json({ message: `Product with id ${pid} updated` });
+    } catch (err) {
+      res.status(500).json({ error: "Error de servidor" });
+    }
   } else {
-    res.json({message: "Parameter to update product are incorrect"})
+    res.json({ message: "Parameter to update product are incorrect" });
   }
-
 });
 
 module.exports = router;

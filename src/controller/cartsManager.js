@@ -9,7 +9,6 @@ class CartsManager {
 
   async checkDb() {
     if (!this.carts) {
-      console.log("path", this.path);
       try {
         let db;
         if (fs.existsSync(this.path)) {
@@ -46,17 +45,13 @@ class CartsManager {
 
   async addProductToCart(productId, cartId) {
     await this.checkDb();
-    console.log("llegue aca");
     const cart = this.carts.find((e) => e.id == cartId);
-    console.log("cart:", cart);
     if (cart) {
-      console.log("this.carts antes:", this.carts);
       this.carts = this.carts.map((e, i) =>
         e.id != cartId
           ? e
           : { ...e, products: this.productsHandler(e.products, productId) }
       );
-      console.log("this.carts:", this.carts);
       await fs.promises.writeFile(
         this.path,
         JSON.stringify(this.carts, null, 4)
@@ -81,7 +76,6 @@ class CartsManager {
   async getCart(id) {
     await this.checkDb();
     if (id) {
-      console.log(this.carts);
       const cart = this.carts.find((e) => e.id == id);
       if (cart) {
         const productManager = new ProductManager("./src/models/products.json");

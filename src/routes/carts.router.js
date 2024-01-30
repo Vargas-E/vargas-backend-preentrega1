@@ -16,10 +16,8 @@ router.post("/", async (req, res) => {
 
 router.get("/:cid", async (req, res) => {
   const { cid } = req.params;
-  console.log("cid:", cid);
   try {
     const cart = await cartsManager.getCart(cid);
-    console.log("cart:", cart);
     if (cart) {
       res.status(200).json(cart);
     } else {
