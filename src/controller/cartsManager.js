@@ -68,7 +68,6 @@ class CartsManager {
         e.product != productId ? e : { ...e, quantity: e.quantity + 1 }
       );
     } else {
-      console.log([...products, { product: productId, quantity: 1 }]);
       return [...products, { product: productId, quantity: 1 }];
     }
   }
